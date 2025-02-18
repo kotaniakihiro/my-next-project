@@ -9,14 +9,14 @@ type Props = {
     slug: string;
   };
   searchParams: {
-    dk?: string;
+    dk?: Promise<string>;
   };
 };
 
 export default async function Page({ params, searchParams }: Props) {
   const contentId = params.slug;
   const data = await getNewsDetail(contentId, {
-    draftKey: searchParams.dk,
+    draftKey: await searchParams.dk,
   }).catch(notFound);
   return (
     <>
