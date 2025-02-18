@@ -1,8 +1,11 @@
-import { createNextAuthMiddleware } from "nextjs-basic-auth-middleware";
+import { NextRequest, NextResponse } from "next/server";
 
-export const middleware = createNextAuthMiddleware();
+export function middleware(request: NextRequest) {
+  console.log("Middleware:::" + request.url);
+  return NextResponse.next();
+}
 
 // すべてのページに適用
 export const config = {
-  matcher: ["/(.*)"],
+  matcher: "/:path*",
 };
