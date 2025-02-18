@@ -5,18 +5,19 @@ import { getNewsDetail } from "@/app/_libs/microcms";
 import styles from "@/app/news/[slug]/page.module.css";
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
-  searchParams: {
-    dk?: Promise<string>;
-  };
+  }>;
+  searchParams: Promise<{
+    dk?: string;
+  }>;
 };
 
 export default async function Page({ params, searchParams }: Props) {
-  const contentId = params.slug;
-  const data = await getNewsDetail(contentId, {
-    draftKey: await searchParams.dk,
+  const { slug } = await params;
+  const { dk } = await searchParams;
+  const data = await getNewsDetail(slug, {
+    draftKey: await dk,
   }).catch(notFound);
   return (
     <>
