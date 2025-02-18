@@ -6,14 +6,14 @@ import { NEWS_LIST_LIMIT } from "@/app/_constants";
 import PageNation from "@/app/_components/Pagenation";
 
 type Props = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export default async function Page({ params }: Props) {
-  const categoryId = params.id;
-  const category = await getCategoryDetail(categoryId).catch(notFound);
+  const { id } = await params;
+  const category = await getCategoryDetail(id).catch(notFound);
 
   const { contents: news, totalCount } = await getNewsList({
     limit: NEWS_LIST_LIMIT,

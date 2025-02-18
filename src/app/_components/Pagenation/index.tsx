@@ -5,7 +5,7 @@ import Link from "next/link";
 type Props = {
   totalCount: number;
   current?: number;
-  basePath: string;
+  basePath?: string;
 };
 
 export default function PageNation({
