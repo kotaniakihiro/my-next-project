@@ -4,6 +4,8 @@ import ButtonLink from "@/app/_components/ButtonLink";
 import { getNewsDetail } from "@/app/_libs/microcms";
 import styles from "@/app/news/[slug]/page.module.css";
 
+export const revalidate = 0;
+
 type Props = {
   params: Promise<{
     slug: string;
